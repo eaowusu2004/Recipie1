@@ -1,18 +1,24 @@
 from flask import render_template, url_for, flash, redirect, request
+from flask_login import login_required, current_user
 from Foodimg2Ing import app
 from Foodimg2Ing.output import output
 import os
 
 
 @app.route('/', methods=['GET'])
+@login_required
 def home():
     return render_template('home.html')
 
+
 @app.route('/about', methods=['GET'])
+@login_required
 def about():
     return render_template('about.html')
 
+
 @app.route('/', methods=['POST'])
+@login_required
 def predict():
     if 'imagefile' not in request.files or not request.files['imagefile'].filename:
         return redirect(url_for('home'))
@@ -25,7 +31,9 @@ def predict():
     title, ingredients, recipe = output(image_path)
     return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
 
+
 @app.route('/<samplefoodname>')
+@login_required
 def predictsample(samplefoodname):
     imagefile = os.path.join(app.root_path, 'static', 'images', str(samplefoodname) + ".jpg")
     img = "images/" + str(samplefoodname) + ".jpg"

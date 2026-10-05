@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Sign In — Inverse Cooking AI</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Left Brand Panel -->
+            <div class="auth-panel-left">
+                <div class="auth-brand">
+                    <span class="auth-brand-icon"><i class="fas fa-utensils"></i></span>
+                    <span class="auth-brand-name">Inverse Cooking AI</span>
+                </div>
+
+                <div class="auth-pitch">
+                    <h1 class="auth-heading">Snap a dish.<br>Get the recipe.</h1>
+                    <p class="auth-desc">Upload a food photo and our model predicts the title, ingredients, and step-by-step instructions.</p>
+                </div>
+
+                <div class="auth-features">
+                    <div class="auth-feature-pill"><i class="fas fa-arrow-up"></i> Upload</div>
+                    <div class="auth-feature-pill"><i class="fas fa-leaf"></i> Ingredients</div>
+                    <div class="auth-feature-pill"><i class="fas fa-book-open"></i> Recipe</div>
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="auth-panel-right">
+                <div class="auth-form-header">
+                    <h2>Welcome back</h2>
+                    <p class="auth-subtext">Sign in to generate recipes from your photos.</p>
+                </div>
+
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show auth-alert" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" action="{{ url_for('auth.login', next=request.args.get('next')) }}" class="auth-form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                    <div class="form-group">
+                        <label class="auth-label" for="email">Email</label>
+                        <input type="email" class="form-control auth-input" id="email" name="email" value="{{ email or '' }}" placeholder="name@company.com" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="auth-label" for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" class="form-control auth-input" id="password" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="btn-toggle-password" onclick="togglePassword('password', this)" tabindex="-1" aria-label="Toggle password visibility">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                            <label class="custom-control-label auth-checkbox-label" for="remember">Remember me</label>
+                        </div>
+                        <a href="#" onclick="alert('Password reset link will be sent to your email.'); return false;" class="auth-link-subtle">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-block auth-btn-primary">Sign in</button>
+
+                    <div class="auth-switch-text text-center mt-4">
+                        New here? <a href="{{ url_for('auth.register') }}" class="auth-link-accent">Create an account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

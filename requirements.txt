@@ -23,8 +23,12 @@ torchvision == 0.10.0
 
 # F:\PROJECTS\Flask Projects\Recipe Generation from Food Image\Foodimg2Ing\__init__.py: 1
 # F:\PROJECTS\Flask Projects\Recipe Generation from Food Image\Foodimg2Ing\routes.py: 1
-Flask == 2.2.2
-werkzeug==2.2.2
+Flask >= 2.2.2
+werkzeug >= 2.2.2
+Flask-SQLAlchemy >= 3.0.0
+Flask-Login >= 0.6.0
+Flask-WTF >= 1.2.0
+email-validator >= 2.0.0
 
 # F:\PROJECTS\Flask Projects\Recipe Generation from Food Image\Foodimg2Ing\output.py: 13
 # F:\PROJECTS\Flask Projects\Recipe Generation from Food Image\Foodimg2Ing\utils\ims2file.py: 7

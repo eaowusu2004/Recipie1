@@ -1,83 +1,65 @@
 {% extends "layout.html" %}
 {% block home %}
 
-
-            <div id="info"  class="col-md-8">
-                <div class="card text-center pb-2">
-                    <div class="card-header">
-                      <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                          <a class="nav-link active " id="tabbtn1" href="#" onclick="javascript:myFunctab1()">Recipe 1</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link " id="tabbtn2" href="#" onclick="javascript:myFunctab2()">Recipe 2</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div id="tab1" >
-                      <div class="card-body" align="left" id="result">
-                        {% if title[0] != "Not a valid recipe!" %}
-                          <h5 class="card-title" align='center'>{{title[0]}}</h5>
-                          <br>
-                          <h6>Ingredients :</h6>
-                          <p class="card-text">{{', '.join(ingredients[0])}}</p>
-                          <br>
-                          <h6>Recipe :</h6>
-                          <ol class="pl-3">
-                          {% for i in recipe[0] %}
-                          <li class="card-text">{{i}}</li>
-                          {% endfor %}
-                          </ol>
-
-                        {% else %}
-                        <h5 class="card-title" align='center'>{{title[0]}}</h5>
-                        <br>
-                        <h6 class="card-text">{{recipe[0]}}</h6>
-                        {% endif %}
-                        <br>
-                        <p class="card-text"><small class="text-muted">Check both the Recipes</small></p>
-                      </div>
-                    </div>
-
-
-                    <div  id="tab2" style="display:None">
-                      <div class="card-body" align="left" id="result">
-                        {% if title[1] != "Not a valid recipe!" %}
-                          <h5 class="card-title" align='center'>{{title[1]}}</h5>
-                          <br>
-                          <h6>Ingredients :</h6>
-                          <p class="card-text">{{', '.join(ingredients[1])}}</p>
-                          <br>
-                          <h6>Recipe :</h6>
-                          <ol class="pl-3">
-                          {% for i in recipe[1] %}
-                          <li class="card-text">{{i}}</li>
-                          {% endfor %}
-                          </ol>
-
-                        {% else %}
-                        <h5 class="card-title" align='center'>{{title[1]}}</h5>
-                        <br>
-                        <h6 class="card-text">{{recipe[1]}}</h6>
-                        {% endif %}
-                      </div>
-                    </div>
-                    
-                  </div>
-            </div>
-
-            <div id="loading" style="display:none;" class="col-md-8">
-              <div class="loader">
-                  <div class="inner one"></div>
-                  <div class="inner two"></div>
-                  <div class="inner three"></div>
-                  <h4>Loading</h4>
-                  <h5>Kindly wait for few seconds</h5>
-              </div>
-            </div>
-
-        </div>
+<!-- RIGHT CARD: AI Generated Recipe Prediction -->
+<div class="ui-card card-right">
+    <!-- Recipe Tabs Header -->
+    <div class="recipe-tabs-bar">
+        <button type="button" class="recipe-tab-btn active" id="tabbtn1" onclick="switchRecipeTab(1)">
+            <i class="fas fa-utensils" style="margin-right: 6px;"></i> Recipe 1 (Standard)
+        </button>
+        <button type="button" class="recipe-tab-btn" id="tabbtn2" onclick="switchRecipeTab(2)">
+            <i class="fas fa-fire" style="margin-right: 6px;"></i> Recipe 2 (Alternative)
+        </button>
     </div>
-</div>    
+
+    <!-- Recipe 1 Tab -->
+    <div id="recipeTab1" class="card-right-body">
+        {% if title[0] != "Not a valid recipe!" %}
+            <h1 class="app-main-title" style="font-size: 28px; margin-bottom: 16px;">{{ title[0] }}</h1>
+
+            <h3 class="subheading-amber">Ingredients</h3>
+            <div class="recipe-chips-wrapper">
+                {% for item in ingredients[0] %}
+                    <span class="recipe-chip">{{ item }}</span>
+                {% endfor %}
+            </div>
+
+            <h3 class="subheading-amber">Instructions</h3>
+            <ol class="recipe-steps-list">
+                {% for step in recipe[0] %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <h2 class="app-main-title text-center my-4">{{ title[0] }}</h2>
+            <p class="paragraph-body text-center">{{ recipe[0] }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Recipe 2 Tab -->
+    <div id="recipeTab2" class="card-right-body" style="display: none;">
+        {% if title[1] != "Not a valid recipe!" %}
+            <h1 class="app-main-title" style="font-size: 28px; margin-bottom: 16px;">{{ title[1] }}</h1>
+
+            <h3 class="subheading-amber">Ingredients</h3>
+            <div class="recipe-chips-wrapper">
+                {% for item in ingredients[1] %}
+                    <span class="recipe-chip">{{ item }}</span>
+                {% endfor %}
+            </div>
+
+            <h3 class="subheading-amber">Instructions</h3>
+            <ol class="recipe-steps-list">
+                {% for step in recipe[1] %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <h2 class="app-main-title text-center my-4">{{ title[1] }}</h2>
+            <p class="paragraph-body text-center">{{ recipe[1] }}</p>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock home %}

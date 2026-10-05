@@ -45,3 +45,11 @@ env/
 ._*
 .Spotlight-V100
 .Trashes
+
+# Databases & local environment
+*.db
+*.sqlite
+*.sqlite3
+.env
+.env.*
+

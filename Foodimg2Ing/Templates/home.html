@@ -1,31 +1,23 @@
 {% extends "layout.html" %}
 {% block home %}
 
+<!-- RIGHT CARD: Recipe Generation from Food Image -->
+<div class="ui-card card-right">
+    <img src="{{ url_for('static', filename='images/cover.jpg') }}" alt="Food Spread Banner" class="card-banner-photo">
+    
+    <div class="card-right-body">
+        <h1 class="app-main-title">Recipe Generation from Food Image</h1>
 
-            <div id="info" class="col-md-8">
-                <div class="card m-3">
-                    <img src="{{ url_for('static',filename='images/cover.jpg')}}" class="card-img-top" alt="..." >
-                    <div class="card-body" >
-                      <h5 class="card-title text-center" id=infotitle >Recipe Generation from Food Image</h5>
-                      <br>
-                      <p class="card-text" id="infobody">Upload any Food Image<br>Our Model will predict its Food Name , Ingredients and its Recipe.</p>
-                      <p class="card-text"><small class="text-muted">Processing time : Approx 40s</small></p>
-                    </div>
-                  </div>
-            </div>
+        <h3 class="subheading-amber">About The App</h3>
+        <p class="paragraph-body">
+            Welcome to Inverse Cooking AI, where we transform your food photos into detailed recipes. Upload an image, and our AI identifies the ingredients and steps to recreate it.
+        </p>
 
-
-            <div id="loading" style="display:none;" class="col-md-8">
-                <div class="loader">
-                    <div class="inner one"></div>
-                    <div class="inner two"></div>
-                    <div class="inner three"></div>
-                    <h4>Loading</h4>
-                    <h5>Kindly wait for few seconds</h5>
-                </div>
-            </div>
-        </div>
+        <h3 class="subheading-amber">How It Works</h3>
+        <p class="paragraph-body" style="margin-bottom: 0;">
+            Upload a clear food image. The AI analyzes it and generates the full recipe including ingredients, instructions, and cook time.
+        </p>
     </div>
-</div>    
+</div>
 
 {% endblock home %}

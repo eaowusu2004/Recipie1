@@ -1,93 +1,95 @@
 {% extends "header.html" %}
 {% block content %}
 
-<div id="section-2">
-  <div class="container pt-5">
-      <div class="row">
-          <div class="col-md-4">
-              <div class="wrapper">
-              <div class="image">
-                  {% if img %}
-                  <img id="foodimage" onload="$(this).data('loaded', 'loaded');" src="{{ url_for('static',filename=img)}}" alt="">
-                  {% else %}
-                  <img id="foodimage" onload="$(this).data('loaded', 'loaded');" src="" alt="">
-                  
-                  {% endif %}
-                  
+<div class="content-grid">
+    <!-- LEFT CARD: Upload & Select -->
+    <div class="ui-card card-left">
+        <h2 class="card-title-left">Upload & Select</h2>
 
-              </div>
-              <div class="content">
-                  <div class="icon text-center">
+        <!-- Dashed Dropzone -->
+        <div class="dropzone-area" id="dropzoneBox" onclick="triggerFileSelect()">
+            <img id="imagePreviewEl" class="dropzone-preview" {% if img %}src="{{ url_for('static', filename=img) }}" style="display: block;"{% endif %} alt="Food Preview">
+            
+            <button type="button" class="dropzone-clear-btn" id="clearPreviewBtn" onclick="clearSelectedImage(event)" title="Remove image">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="dropzone-content" id="dropzonePlaceholder" {% if img %}style="display: none;"{% endif %}>
+                <div class="dropzone-icon">
                     <i class="fas fa-cloud-upload-alt"></i>
-                  </div>
-                  <div class="text">
-                      No file chosen, yet!
-                  </div>
-              </div>
-              <div id="cancel-btn">
-                  <i class="fas fa-times"></i>
-              </div>
-              <div class="file-name">
-                  File name here
-              </div>
-              </div>
-              <button onclick="defaultBtnActive()" id="custom-btn">Upload a Food Image</button>
-              <form id='foodimgform'action="/" method="POST" enctype="multipart/form-data">
-                <input id="default-btn" type="file" hidden name="imagefile">
-              </form>
-              <button id="buttonsample" data-toggle="modal" data-target="#myModal">Choose from Sample Image</button>
-              <div class="modal" id="myModal" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Sample Food Images</h5>
-                      <button id="close" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                              <div class="col">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ url_for('static',filename='images/burger.jpg') }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Burger</h5>
-                                      <a href="burger" class="btn btn-primary" onclick="select('burger.jpg')">Select</a>
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ url_for('static',filename='images/chocolate-cake.jpg') }}" class="card-img-top" alt="..." >
-                                    <div class="card-body">
-                                      <h5 class="card-title">Chocolate Cake</h5>
-                                      <a href="chocolate-cake" class="btn btn-primary" onclick="select('chocolate-cake.jpg')" >Select</a>
-                                    </div>
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="{{ url_for('static',filename='images/grilled-beef.jpg') }}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Grilled Beef</h5>
-                                      <a href="grilled-beef" class="btn btn-primary" onclick="select('grilled-beef.jpg')">Select</a>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
                 </div>
-              </div>
-              
-          </div>
+                <p class="dropzone-text-main">Drag & Drop an image here</p>
+                <p class="dropzone-text-sub">or click to browse</p>
+            </div>
+        </div>
 
-  {% block home %}{% endblock %}
+        <!-- Inline Validation Error -->
+        <p class="upload-inline-error" id="uploadErrorMsg">
+            <i class="fas fa-exclamation-circle"></i> Choose a photo first.
+        </p>
 
-  {% endblock %}
+        <!-- Hidden Upload Form -->
+        <form id="foodUploadForm" action="/" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input id="hiddenFileInput" type="file" hidden name="imagefile" accept="image/*">
+        </form>
 
+        <!-- Button 1: Primary Upload Button -->
+        <button type="button" class="btn-primary-upload" id="submitUploadBtn" onclick="handleUploadSubmit()">
+            <i class="fas fa-camera"></i>
+            <span id="submitBtnText">Upload a Food Image</span>
+        </button>
+
+        <!-- Button 2: Secondary Sample Button -->
+        <button type="button" class="btn-secondary-sample" data-toggle="modal" data-target="#sampleModal">
+            Choose from Sample Image
+        </button>
+    </div>
+
+    <!-- RIGHT CARD: Dynamic Content (Home Info or Recipe Predictions) -->
+    {% block home %}{% endblock %}
+</div>
+
+<!-- Sample Dishes Modal -->
+<div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="sampleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content modal-content-custom">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title modal-title-custom" id="sampleModalTitle">
+                    <i class="fas fa-utensils" style="color: var(--accent-amber);"></i>
+                    Choose a Sample Food Dish
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: var(--text-muted); font-size: 24px; opacity: 0.8; text-shadow: none;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="sample-grid">
+                    <div class="sample-card-item">
+                        <img src="{{ url_for('static', filename='images/burger.jpg') }}" alt="Burger" class="sample-card-img">
+                        <div class="sample-card-body">
+                            <h6 class="sample-card-name">Burger</h6>
+                            <a href="{{ url_for('predictsample', samplefoodname='burger') }}" class="btn-sample-pick" onclick="handleSampleClick('burger.jpg')">Select & Predict</a>
+                        </div>
+                    </div>
+                    <div class="sample-card-item">
+                        <img src="{{ url_for('static', filename='images/chocolate-cake.jpg') }}" alt="Chocolate Cake" class="sample-card-img">
+                        <div class="sample-card-body">
+                            <h6 class="sample-card-name">Chocolate Cake</h6>
+                            <a href="{{ url_for('predictsample', samplefoodname='chocolate-cake') }}" class="btn-sample-pick" onclick="handleSampleClick('chocolate-cake.jpg')">Select & Predict</a>
+                        </div>
+                    </div>
+                    <div class="sample-card-item">
+                        <img src="{{ url_for('static', filename='images/grilled-beef.jpg') }}" alt="Grilled Beef" class="sample-card-img">
+                        <div class="sample-card-body">
+                            <h6 class="sample-card-name">Grilled Beef</h6>
+                            <a href="{{ url_for('predictsample', samplefoodname='grilled-beef') }}" class="btn-sample-pick" onclick="handleSampleClick('grilled-beef.jpg')">Select & Predict</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

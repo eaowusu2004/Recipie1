@@ -1,31 +1,40 @@
-{% extends "layout.html" %}
+{% extends "header.html" %}
 {% block content %}
 
+<div id="section-about">
+    <div class="about-card">
+        <div class="d-flex align-items-center mb-3">
+            <span class="navbar-brand-icon mr-3" style="width: 42px; height: 42px; font-size: 1.2rem;">
+                <i class="fas fa-info-circle"></i>
+            </span>
+            <h2 class="about-title mb-0">About Inverse Cooking AI</h2>
+        </div>
 
+        <div class="section-tag">
+            <i class="fas fa-project-diagram"></i> Project Overview
+        </div>
+        <p class="about-content">
+            <strong>Inverse Cooking AI</strong> is an end-to-end deep learning system that reconstructs cooking recipes directly from food images. Behind every meal there is a story and a preparation process—our application bridges the gap between visual food appreciation and actionable cooking knowledge.
+        </p>
 
+        <div class="section-tag">
+            <i class="fas fa-cogs"></i> Technical Architecture
+        </div>
+        <p class="about-content">
+            Our model employs a multi-stage approach:
+        </p>
+        <ul class="recipe-steps-list pl-2">
+            <li><strong>Computer Vision Encoder (ResNet-50)</strong>: Extracts high-dimensional visual feature representations from uploaded food photographs.</li>
+            <li><strong>Ingredient Prediction Module</strong>: Formulates ingredients as an unordered set, modeling their joint dependencies without imposing an artificial order.</li>
+            <li><strong>Transformer Instruction Decoder</strong>: Generates coherent, step-by-step cooking instructions by attending simultaneously to visual image patches and inferred ingredient embeddings.</li>
+        </ul>
+
+        <div class="mt-4 pt-3 text-center" style="border-top: 1px solid #222228;">
+            <a href="{{ url_for('home') }}" class="btn btn-nav-signin px-4 py-2" style="background: #f59e0b; color: #09090b !important; font-weight: 700; border-radius: 10px;">
+                <i class="fas fa-arrow-left"></i> Back to Recipe Generator
+            </a>
         </div>
     </div>
-</div>    
-
-<div id="section-about"onload="sampleFunction()">
-    <div id="aboutcard" class="card col-md-8">
-        <div class="card-header ">
-          <b>ABOUT</b>
-        </div>
-        <div class="card-body">
-          <p class="title">TITLE : Recipe Generation From Food Image</p>
-          <p class="title">ABSTRACT :</p>
-          <p class="aboutcontent">People enjoy food photography because they appreciate
-            food. Behind each meal there is a story described in a complex recipe and, unfortunately, by simply looking at a food
-            image we do not have access to its preparation process.
-            Therefore, in this paper we introduce an inverse cooking
-            system that recreates cooking recipes given food images.
-            Our system predicts ingredients as sets by means of a novel
-            architecture, modeling their dependencies without imposing any order, and then generates cooking instructions by
-            attending to both image and its inferred ingredients simultaneously.
-            </p>
-        </div>
-      </div>
 </div>
 
 {% endblock content %}
