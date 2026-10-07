@@ -394,12 +394,12 @@ def try_gemini_vision(uploadedfile):
         from google import genai
         from google.genai import types
 
-        client = genai.Client(api_key=api_key)
+        client = genai.Client(api_key=api_key, http_options={'api_version': 'v1beta'})
         pil_img = Image.open(uploadedfile).convert('RGB')
 
         prompt = """
         You are an expert culinary AI. Analyze this food photograph and generate two recipe variations:
-        - Recipe 1: The standard, authentic preparation of this exact dish (especially identify regional, African, Ghanaian, Asian, or Western dishes accurately like Banku, Jollof, Fufu, Pizza, Burger, etc.).
+        - Recipe 1: The standard, authentic preparation of this exact dish (especially identify regional, African, Ghanaian, Asian, Japanese, or Western dishes accurately like Sushi, Banku, Jollof, Fufu, Pizza, Burger, Ramen, etc.).
         - Recipe 2: A creative or alternative variation of this dish.
 
         Return ONLY a JSON object with this exact structure:
@@ -417,25 +417,35 @@ def try_gemini_vision(uploadedfile):
         }
         """
 
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=[pil_img, prompt],
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.4
-            )
-        )
+        candidate_models = ['gemini-2.5-flash-lite', 'gemini-flash-lite-latest', 'gemini-3.8-flash']
+        response = None
+        for m in candidate_models:
+            try:
+                response = client.models.generate_content(
+                    model=m,
+                    contents=[pil_img, prompt],
+                    config=types.GenerateContentConfig(
+                        response_mime_type="application/json",
+                        temperature=0.4
+                    )
+                )
+                if response and response.text:
+                    break
+            except Exception as model_err:
+                print(f"[!] Model {m} failed: {model_err}, trying next candidate...")
+                continue
 
-        data = json.loads(response.text)
-        r1 = data.get('recipe1', {})
-        r2 = data.get('recipe2', {})
+        if response and response.text:
+            data = json.loads(response.text)
+            r1 = data.get('recipe1', {})
+            r2 = data.get('recipe2', {})
 
-        title = [r1.get('title', 'Delicious Dish'), r2.get('title', r1.get('title', 'Delicious Dish'))]
-        ingredients = [r1.get('ingredients', []), r2.get('ingredients', r1.get('ingredients', []))]
-        recipe = [r1.get('recipe', []), r2.get('recipe', r1.get('recipe', []))]
+            title = [r1.get('title', 'Delicious Dish'), r2.get('title', r1.get('title', 'Delicious Dish'))]
+            ingredients = [r1.get('ingredients', []), r2.get('ingredients', r1.get('ingredients', []))]
+            recipe = [r1.get('recipe', []), r2.get('recipe', r1.get('recipe', []))]
 
-        if len(title) == 2 and len(ingredients[0]) > 0 and len(recipe[0]) > 0:
-            return title, ingredients, recipe
+            if len(title) == 2 and len(ingredients[0]) > 0 and len(recipe[0]) > 0:
+                return title, ingredients, recipe
     except Exception as e:
         print(f"[!] Gemini Vision fallback encountered: {e}")
 
