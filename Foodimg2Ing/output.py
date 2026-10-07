@@ -194,16 +194,144 @@ AFRICAN_DISHES_KB = {
                 'Serve with freshly fried sweet plantain slices.'
             ]
         }
+    },
+    'sushi': {
+        'recipe1': {
+            'title': 'Classic Salmon & Avocado Maki Sushi Rolls',
+            'ingredients': [
+                'sushi rice (short-grain)', 'nori seaweed sheets', 'fresh sashimi-grade salmon',
+                'ripe avocado', 'cucumber', 'rice vinegar', 'sugar & salt', 'soy sauce', 'wasabi paste', 'pickled ginger (gari)'
+            ],
+            'recipe': [
+                'Rinse short-grain sushi rice thoroughly until water runs clear, cook until tender, and season with warm rice vinegar, sugar, and salt while fanning to achieve a glossy finish.',
+                'Place a roasted nori seaweed sheet on a bamboo rolling mat (makisu) with the shiny side facing down.',
+                'Lightly moisten fingers with water and spread a thin, even layer of sushi rice across the nori, leaving a 1-inch border at the top edge.',
+                'Arrange long, thin slices of fresh salmon, avocado, and julienned cucumber horizontally across the center of the rice.',
+                'Lift the bottom of the bamboo mat and roll firmly away from you, applying gentle, even pressure to form a tight, uniform cylindrical roll.',
+                'Moisten a very sharp chef knife with cold water and slice the sushi roll cleanly into 6 to 8 bite-sized rounds.',
+                'Plate neatly and serve with premium soy sauce, wasabi paste, and pickled ginger slices.'
+            ]
+        },
+        'recipe2': {
+            'title': 'Spicy Tuna & Crispy Tempura Crunch Roll',
+            'ingredients': [
+                'seasoned sushi rice', 'nori seaweed sheets', 'sashimi-grade tuna (finely minced)',
+                'sriracha hot sauce', 'japanese kewpie mayonnaise', 'toasted sesame oil',
+                'crispy tempura flakes', 'sweet unagi (eel) sauce or spicy mayo', 'spring onions'
+            ],
+            'recipe': [
+                'Combine minced raw tuna with sriracha, Kewpie mayonnaise, chopped spring onions, and a drop of toasted sesame oil in a small bowl until creamy.',
+                'Lay nori sheet on a rolling mat and spread a layer of seasoned sushi rice evenly across the seaweed.',
+                'Spoon a generous line of spicy tuna and crisp cucumber strips along the bottom third of the roll.',
+                'Roll tightly using the bamboo mat, sealing the edge with a dab of water.',
+                'Cut the roll into slices using a damp knife, then generously coat the top with crispy tempura flakes.',
+                'Drizzle with sweet unagi sauce or spicy mayo and serve immediately for maximum crunch.'
+            ]
+        }
+    },
+    'ramen': {
+        'recipe1': {
+            'title': 'Rich Tonkotsu Pork & Shoyu Ramen with Soft-Boiled Egg',
+            'ingredients': [
+                'fresh ramen noodles', 'rich pork or chicken bone broth', 'shoyu (soy sauce) tare',
+                'chashu pork belly slices', 'ramen egg (ajitsuke tamago - soft boiled marinated)',
+                'nori sheets', 'green onions (scallions)', 'sesame oil', 'bamboo shoots (menma)'
+            ],
+            'recipe': [
+                'Simmer rich bone broth with aromatics (ginger, garlic, spring onions) until deep, milky, and intensely flavorful.',
+                'Boil eggs for exactly 6 minutes and 30 seconds, ice-shock, peel, and marinate in soy sauce, mirin, and water.',
+                'Sear and braise tender chashu pork belly slices, then slice thinly.',
+                'Boil fresh ramen noodles in a large pot of boiling water for 1-2 minutes until al dente, then shake dry.',
+                'Pour hot seasoned broth into serving bowls, fold in the cooked ramen noodles, and arrange chashu pork, halved marinated egg, menma, scallions, and nori neatly on top.'
+            ]
+        },
+        'recipe2': {
+            'title': 'Spicy Miso Vegetable & Tofu Ramen',
+            'ingredients': [
+                'ramen noodles', 'vegetable broth', 'red & white miso paste', 'crispy pan-fried tofu',
+                'bok choy', 'shiitake mushrooms', 'sweet corn', 'chili garlic oil', 'toasted sesame seeds'
+            ],
+            'recipe': [
+                'Whisk red and white miso paste with sautéed garlic, ginger, and chili oil into steaming hot vegetable stock.',
+                'Pan-fry firm tofu cubes until golden and crispy on all sides.',
+                'Blanch baby bok choy and sauté fresh shiitake mushrooms with a dash of soy sauce.',
+                'Cook ramen noodles until springy, divide into deep bowls, and ladle the rich spicy miso broth over them.',
+                'Garnish with crispy tofu, steamed bok choy, sweet corn kernels, shiitake mushrooms, and a drizzle of chili garlic oil.'
+            ]
+        }
+    },
+    'tacos': {
+        'recipe1': {
+            'title': 'Authentic Mexican Street Tacos with Grilled Carne Asada',
+            'ingredients': [
+                'small white corn tortillas', 'flank or skirt steak (carne asada)', 'lime juice',
+                'fresh cilantro (finely chopped)', 'white onions (finely diced)', 'garlic & cumin',
+                'salsa verde or salsa roja', 'avocado slices', 'cotija cheese'
+            ],
+            'recipe': [
+                'Marinate flank steak in lime juice, crushed garlic, cumin, oregano, and olive oil for at least 30 minutes.',
+                'Grill meat over high heat for 3-4 minutes per side until charred and juicy, then rest and dice into small pieces.',
+                'Warm corn tortillas on a dry hot skillet until soft, pliable, and lightly toasted.',
+                'Double-layer the tortillas and pile high with grilled carne asada.',
+                'Top with diced white onions, fresh cilantro, salsa verde, and a squeeze of fresh lime juice.'
+            ]
+        },
+        'recipe2': {
+            'title': 'Baja-Style Crispy Fish Tacos with Chipotle Slaw',
+            'ingredients': [
+                'flour or corn tortillas', 'white fish fillets (cod or tilapia)', 'beer batter (flour, beer, spices)',
+                'shredded purple cabbage', 'chipotle lime crema (sour cream, chipotle, lime)', 'fresh pico de gallo'
+            ],
+            'recipe': [
+                'Dip fresh fish strips into a seasoned cold beer batter and deep-fry in hot oil until crispy and golden.',
+                'Toss shredded cabbage with lime juice, cilantro, and creamy chipotle mayo.',
+                'Warm tortillas, place crispy fish inside, and top with crunchy slaw, pico de gallo, and fresh lime wedges.'
+            ]
+        }
+    },
+    'biryani': {
+        'recipe1': {
+            'title': 'Royal Hyderabadi Chicken Dum Biryani',
+            'ingredients': [
+                'long-grain aged basmati rice', 'chicken thighs/pieces', 'plain yogurt (curd)',
+                'fried onions (birista)', 'saffron milk', 'ghee', 'biryani masala (cardamom, cloves, cinnamon, star anise)',
+                'fresh mint & coriander leaves', 'ginger-garlic paste'
+            ],
+            'recipe': [
+                'Marinate chicken in yogurt, ginger-garlic paste, red chili, turmeric, biryani spices, mint, and half the fried onions for 1 hour.',
+                'Parboil washed basmati rice with whole spices until 70% cooked, then drain.',
+                'Layer marinated chicken at the bottom of a heavy pot, followed by the fragrant parboiled rice.',
+                'Top with golden fried onions, fresh mint, coriander, saffron-infused milk, and melted ghee.',
+                'Seal pot tightly with dough or foil and cook on high for 5 minutes, then low dum heat for 25 minutes until chicken is tender and rice grains are long and fluffy.',
+                'Serve hot with cool cucumber raita.'
+            ]
+        },
+        'recipe2': {
+            'title': 'Fragrant Vegetable & Paneer Dum Biryani',
+            'ingredients': [
+                'basmati rice', 'paneer cubes', 'mixed vegetables (carrots, peas, potatoes, beans)',
+                'fried onions', 'saffron milk', 'mint leaves', 'ghee', 'biryani spices', 'yogurt'
+            ],
+            'recipe': [
+                'Sauté paneer cubes until golden and mix with par-cooked vegetables in a spiced yogurt gravy.',
+                'Layer aromatic parboiled basmati rice over the spiced vegetable mixture.',
+                'Drizzle with saffron milk, rose water, and ghee, then seal and dum cook on low heat for 20 minutes.',
+                'Gently fluff and serve with mint raita.'
+            ]
+        }
     }
 }
+
+# Aliases for matching
+CURATED_DISHES_KB = AFRICAN_DISHES_KB
 
 
 def match_local_african_dish(uploadedfile):
     """
-    Check if the uploaded image matches known African/Ghanaian culinary dishes.
+    Check if the uploaded image matches known curated culinary dishes.
     """
     filename = os.path.basename(str(uploadedfile)).lower()
-    for key, dish in AFRICAN_DISHES_KB.items():
+    for key, dish in CURATED_DISHES_KB.items():
         if key in filename:
             r1 = dish['recipe1']
             r2 = dish['recipe2']
