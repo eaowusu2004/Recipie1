@@ -1,37 +1,33 @@
 {% extends "header.html" %}
 {% block content %}
 
-<div id="section-about">
-    <div class="about-card">
+<div class="container py-4 d-flex justify-content-center">
+    <div class="ui-card p-4" style="max-width: 800px; width: 100%;">
         <div class="d-flex align-items-center mb-3">
             <span class="navbar-brand-icon mr-3" style="width: 42px; height: 42px; font-size: 1.2rem;">
                 <i class="fas fa-info-circle"></i>
             </span>
-            <h2 class="about-title mb-0">About Inverse Cooking AI</h2>
+            <h2 class="app-main-title mb-0" style="font-size: 26px;">About Inverse Cooking AI</h2>
         </div>
 
-        <div class="section-tag">
-            <i class="fas fa-project-diagram"></i> Project Overview
-        </div>
-        <p class="about-content">
-            <strong>Inverse Cooking AI</strong> is an end-to-end deep learning system that reconstructs cooking recipes directly from food images. Behind every meal there is a story and a preparation process—our application bridges the gap between visual food appreciation and actionable cooking knowledge.
+        <h3 class="subheading-amber mt-3 mb-2">Project Overview</h3>
+        <p class="about-content" style="color: var(--text-secondary); line-height: 1.7; font-size: 15px;">
+            People enjoy food photography because they appreciate culinary art. Behind each meal, there is a rich story and preparation process. However, simply looking at a food photograph does not give us access to its ingredients or cooking steps.
+        </p>
+        <p class="about-content" style="color: var(--text-secondary); line-height: 1.7; font-size: 15px;">
+            <strong>Inverse Cooking AI</strong> solves this challenge by predicting ingredients as an unordered set and decoding coherent, step-by-step cooking instructions by attending simultaneously to both the visual image and its inferred ingredients.
         </p>
 
-        <div class="section-tag">
-            <i class="fas fa-cogs"></i> Technical Architecture
-        </div>
-        <p class="about-content">
-            Our model employs a multi-stage approach:
-        </p>
-        <ul class="recipe-steps-list pl-2">
-            <li><strong>Computer Vision Encoder (ResNet-50)</strong>: Extracts high-dimensional visual feature representations from uploaded food photographs.</li>
-            <li><strong>Ingredient Prediction Module</strong>: Formulates ingredients as an unordered set, modeling their joint dependencies without imposing an artificial order.</li>
-            <li><strong>Transformer Instruction Decoder</strong>: Generates coherent, step-by-step cooking instructions by attending simultaneously to visual image patches and inferred ingredient embeddings.</li>
+        <h3 class="subheading-amber mt-4 mb-2">Key Capabilities</h3>
+        <ul class="recipe-steps-list pl-2" style="color: var(--text-secondary); line-height: 1.8; font-size: 14px;">
+            <li><strong>Deep Computer Vision (ResNet-50)</strong>: Spatial visual feature extraction fine-tuned on Recipe1M.</li>
+            <li><strong>Transformer Instruction Decoder</strong>: Autoregressive dual-recipe generation with standard and creative variations.</li>
+            <li><strong>Global & Regional Food Recognition</strong>: Hybrid multimodal vision engine supporting local Ghanaian specialties (Banku, Fufu, Jollof, Waakye) and world dishes (Sushi, Ramen, Tacos, Pizza).</li>
         </ul>
 
-        <div class="mt-4 pt-3 text-center" style="border-top: 1px solid #222228;">
-            <a href="{{ url_for('home') }}" class="btn btn-nav-signin px-4 py-2" style="background: #f59e0b; color: #09090b !important; font-weight: 700; border-radius: 10px;">
-                <i class="fas fa-arrow-left"></i> Back to Recipe Generator
+        <div class="mt-4 pt-3 text-center" style="border-top: 1px solid var(--border-color);">
+            <a href="{{ url_for('home') }}" class="btn-primary-upload d-inline-flex align-items-center" style="width: auto; padding: 10px 24px;">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Recipe Generator
             </a>
         </div>
     </div>
