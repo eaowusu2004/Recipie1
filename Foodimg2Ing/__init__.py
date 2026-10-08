@@ -11,6 +11,7 @@ app = Flask(__name__, template_folder='Templates')
 
 # Security & Database Configuration
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-secret-key-inverse-cooking-ai-2026')
+app.config['WTF_CSRF_TIME_LIMIT'] = None  # Prevent CSRF token expiration
 db_path = os.path.join(app.root_path, 'users.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', f'sqlite:///{db_path}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -18,6 +19,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Initialize Extensions
 db.init_app(app)
 csrf = CSRFProtect(app)
+
+from flask_wtf.csrf import CSRFError
+from flask import redirect, url_for, flash, request
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    flash('Session was refreshed. Please try again.', 'warning')
+    return redirect(request.referrer or url_for('home'))
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'

@@ -1,8 +1,13 @@
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, send_from_directory
 from flask_login import login_required, current_user
 from Foodimg2Ing import app
 from Foodimg2Ing.output import output
 import os
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'images'), 'favicon.ico')
 
 
 @app.route('/', methods=['GET'])
@@ -35,7 +40,11 @@ def predict():
 @app.route('/<samplefoodname>')
 @login_required
 def predictsample(samplefoodname):
+    if samplefoodname in ['favicon.ico', 'robots.txt']:
+        return redirect(url_for('static', filename=f'images/{samplefoodname}'))
     imagefile = os.path.join(app.root_path, 'static', 'images', str(samplefoodname) + ".jpg")
+    if not os.path.exists(imagefile):
+        return redirect(url_for('home'))
     img = "images/" + str(samplefoodname) + ".jpg"
     title, ingredients, recipe = output(imagefile)
     return render_template('predict.html', title=title, ingredients=ingredients, recipe=recipe, img=img)
